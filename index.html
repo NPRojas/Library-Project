@@ -11,9 +11,25 @@
     <div class="article"></div>
     <button class="addBookBtn" type="button">Add New Book</button>
 
-    <dialog class="testDiv">
-        <p>This is a dialog</p>
-        <button class="submitBtn">Close</button>
+    <dialog class="addBookForm">
+        <form class="bookForm" action="" method="dialog">
+            <label for="bookTitle">Book Title:</label>
+            <input type="text" name="bookTitle" id="bookTitle" required> 
+
+            <label for="author">Author:</label>
+            <input type="text" name="author" id="author" required> 
+
+            <label for="numOfPages">Number of Pages:</label>
+            <input type="number" name="numOfPages" id="numOfPages" required> 
+
+            <label for="read">Read</label>
+            <input type="checkbox" name="read" id="read">
+
+            <button class="submitBtn" type="submit">Submit</button>
+            <button class="closeBtn" type="button">Close</button>
+
+        </form>
+        
     </dialog>
 </body>
 </html>
