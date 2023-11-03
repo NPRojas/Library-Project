@@ -1,0 +1,19 @@
+* {
+   margin: 0;
+   padding: 0;
+}
+
+.article {
+    display:grid;
+    font-size: 18px;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    gap: 10px;
+}
+
+.article .card {
+    background-color: rgb(187, 187, 15);
+    color: rgb(88, 88, 97);
+    min-height: 8em;
+    padding: 8px;
+}
