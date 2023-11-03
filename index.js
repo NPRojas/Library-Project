@@ -5,7 +5,11 @@ function Book() {
 };
 
 function addBook () {
-    alert('Is this thing on?');
+    const test = document.querySelector('.testDiv');
+    test.showModal();
+   
+    const submitBtn = document.querySelector('.submitBtn');
+    submitBtn.onclick = () => test.close();
 }
 
 function addBookToLibrary() {
