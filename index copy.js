@@ -11,7 +11,7 @@ Book.prototype.isRead = function () {
    alert('This is a test');
 }
 
-function addBookToLibrary() {
+function initBtns() {
     const addBookBtn = document.querySelector('.addBookBtn');
 
     addBookBtn.addEventListener('click', () => {
@@ -23,11 +23,11 @@ function addBookToLibrary() {
         closeBtn.onclick = () => addBookForm.close();
 
         const bookForm = document.querySelector('.bookForm');
-        bookForm.addEventListener('submit', convertUserInput, true);
+        bookForm.addEventListener('submit', addBookToLibrary, true);
     })
 }
 
-function convertUserInput(event) {
+function addBookToLibrary(event) {
     event.preventDefault();
     // this is where the input will be turned into an object
     const titleInput = document.querySelector('#bookTitle');
@@ -39,24 +39,8 @@ function convertUserInput(event) {
     //resets form
     const bookForm = document.querySelector('.bookForm');
     bookForm.reset();
-    //card display //this might be another function
-    const article = document.querySelector('.article');
 
-    const lastBookAdded = myLibrary.slice(-1)[0];
-   
-    const card = document.createElement('div');
-    card.classList.add('card');
-    const title = document.createElement('h3');
-    title.textContent = `${lastBookAdded.title}`;
-    const authorDisplay = document.createElement('p');
-    authorDisplay.textContent = `By ${lastBookAdded.author}`;
-    const pagesDisplay = document.createElement('p');
-    pagesDisplay.textContent =  `Pages: ${lastBookAdded.pages}`;
-    card.appendChild(title);
-    card.appendChild(authorDisplay);
-    card.appendChild(pagesDisplay);
-    article.appendChild(card);
-
+    displayBookInfo();
 }
 
 function insertObject (object, list) {
@@ -64,5 +48,28 @@ function insertObject (object, list) {
     list.splice(index, 0, object);
 }
 
-addBookToLibrary();
+function displayBookInfo() {
+    const article = document.querySelector('.article');
+
+    const lastBookAdded = myLibrary.slice(-1)[0];
+   
+    const card = document.createElement('div');
+    card.classList.add('card');
+
+    const title = document.createElement('h3');
+    title.textContent = `${lastBookAdded.title}`;
+
+    const authorDisplay = document.createElement('p');
+    authorDisplay.textContent = `By ${lastBookAdded.author}`;
+
+    const pagesDisplay = document.createElement('p');
+    pagesDisplay.textContent =  `Pages: ${lastBookAdded.pages}`;
+
+    card.appendChild(title);
+    card.appendChild(authorDisplay);
+    card.appendChild(pagesDisplay);
+    article.appendChild(card);
+}
+
+initBtns();
  
