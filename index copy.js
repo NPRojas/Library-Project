@@ -1,14 +1,15 @@
 const myLibrary = [];
 
-function Book(title, author, pages) {
+function Book(title, author, pages, read) {
     //the constructor
     this.title = title;
     this.author = author;
     this.pages = pages;
+    this.read = read;
 }
 
 Book.prototype.isRead = function () {
-   alert('This is a test');
+   
 }
 
 function initBtns() {
@@ -33,9 +34,12 @@ function addBookToLibrary(event) {
     const titleInput = document.querySelector('#bookTitle');
     const authorInput = document.querySelector('#author');
     const pagesInput = document.querySelector('#numOfPages');
+    const readInput = document.querySelector('#read');
     // book object gets added into the list
-    const book = new Book(titleInput.value, authorInput.value, pagesInput.value);
+    const book = new Book(titleInput.value, authorInput.value, pagesInput.value, readInput.checked );
     insertObject(book, myLibrary);
+
+    console.log(book.read);
     //resets form
     const bookForm = document.querySelector('.bookForm');
     bookForm.reset();
@@ -43,6 +47,7 @@ function addBookToLibrary(event) {
     displayBookInfo();
 }
 
+// i can replace this with the push method
 function insertObject (object, list) {
     let index = list.length;
     list.splice(index, 0, object);
@@ -67,23 +72,28 @@ function displayBookInfo() {
 
     const pagesDisplay = document.createElement('p');
     pagesDisplay.textContent =  `Pages: ${lastBookAdded.pages}`;
-
+    
     const btn = document.createElement('button');
     btn.textContent = 'Delete';
     btn.classList.add('deleteBtn');
  
-
     card.appendChild(title);
     card.appendChild(authorDisplay);
     card.appendChild(pagesDisplay);
     card.appendChild(btn);
     article.appendChild(card);
 
+    if (lastBookAdded.read) {
+        const readCheck = document.createElement('p');
+        readCheck.textContent = 'READ';
+        card.appendChild(readCheck);
+    };
+
     btn.addEventListener('click', () => deleteBook(lastBookAdded));
 }
 
-function deleteBook(lastBookAdded) {
-    const bookID = myLibrary.findIndex((element) => element.title == lastBookAdded.title);
+function deleteBook(book) {
+    const bookID = myLibrary.findIndex((bookListed) => bookListed.title == book.title);
     const card = document.getElementById(`${bookID}`);
     card.remove();
 }
