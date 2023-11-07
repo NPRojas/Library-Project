@@ -55,6 +55,9 @@ function displayBookInfo() {
    
     const card = document.createElement('div');
     card.classList.add('card');
+    // sets unique id to later target card for deletion
+    const bookID = myLibrary.findIndex((element) => element.title == lastBookAdded.title);
+    card.setAttribute('id', `${bookID}`);
 
     const title = document.createElement('h3');
     title.textContent = `${lastBookAdded.title}`;
@@ -65,10 +68,24 @@ function displayBookInfo() {
     const pagesDisplay = document.createElement('p');
     pagesDisplay.textContent =  `Pages: ${lastBookAdded.pages}`;
 
+    const btn = document.createElement('button');
+    btn.textContent = 'Delete';
+    btn.classList.add('deleteBtn');
+ 
+
     card.appendChild(title);
     card.appendChild(authorDisplay);
     card.appendChild(pagesDisplay);
+    card.appendChild(btn);
     article.appendChild(card);
+
+    btn.addEventListener('click', () => deleteBook(lastBookAdded));
+}
+
+function deleteBook(lastBookAdded) {
+    const bookID = myLibrary.findIndex((element) => element.title == lastBookAdded.title);
+    const card = document.getElementById(`${bookID}`);
+    card.remove();
 }
 
 initBtns();
